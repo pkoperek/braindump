@@ -12,7 +12,7 @@ relative_permalinks: true
 title:               'braindump'
 tagline:             '... cause thread-dumps are not enough ;)'
 description:         ''
-url:                 http://pkoperek.github.io/braindump
+url:                 http://pkoperek.github.io/braindump/
 baseurl:             /
 paginate:            5
 
