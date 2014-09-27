@@ -13,7 +13,7 @@ title:               'braindump'
 tagline:             '... cause thread-dumps are not enough ;)'
 description:         ''
 url:                 http://pkoperek.github.io/braindump/
-baseurl:             /
+baseurl:             /braindump
 paginate:            5
 
 # About/contact
