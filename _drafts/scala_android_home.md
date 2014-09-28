@@ -44,7 +44,9 @@ So how to bootstrap a working scala with libgdx project?
 3. Add `sbt-idea` plugin to `plugins.sbt` (found that hint [here][3]):
 
 ```scala
-addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.5.1") 
+resolvers += "Sonatype snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
+
+addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.7.0-SNAPSHOT")
 ```
 
 **Note: there needs to be an empty line before `sbt-idea` plugin definition.**
@@ -54,13 +56,15 @@ addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.5.1")
 g8 pkoperek/libgdx-sbt-project
 ```
 
-4. Open the project in IntelliJ (not import - this doesn't work - **open**)
+4. Run `sbt "project core" gen-idea`
+5. Open the project in IntelliJ (not import - this doesn't work - **open**)
 5. After opening in IDEA - open `android` module settings. 
-5.1. Goto `Project Setting -> Modules -> android` and add Android facet. 
-5.2. Verify that paths in `Structure` and `Generated Source` are correct (point to `android` directory and not `.idea_modules`). 
-5.3. Remember on setting the language level to `6.0`!
-5.4. Set Android SDK in `Project Settings -> Modules -> android -> Dependencies` settings.
-6. In each module go to Scala facet configuration and change language level to version picked when generating project from `g8` template.
+5.1. Set the language level to `6.0`.
+5.2. Mark `src/main/scala` as `Source Root` and `src/test/scala` as `Test Source Root`
+
+Workflow:
+* After adding a new dep remember about `sbt update` and `sbt "project core" gen-idea`
+* To run app in emulator, start one with AVD and run `sbt android/android:run`
 
 
 [1]: http://raintomorrow.cc/post/70000607238/develop-games-in-scala-with-libgdx-getting-started
