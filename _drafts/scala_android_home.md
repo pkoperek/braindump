@@ -3,7 +3,7 @@ layout: post
 title: libgdx && android && scala && idea
 ---
 
-I would like to seriously start learning Scala... So why not try it out to do some Android development? To make it even more funny (... or tragic) lets mix in the [libgdx][2] library. I started with [this][1] description. Everything works perfectly fine when running:
+I would like to seriously start learning Scala... So why not try it out to do some Android development? To make it even more funny (... or tragic) lets mix in the [libgdx][2] library. I installed Scala and SBT plugins for IntelliJ and started with [this][1] description for project setup. Everything works perfectly fine when running:
 
 ```
 curl https://raw.github.com/n8han/conscript/master/setup.sh | sh
@@ -37,27 +37,31 @@ at java.lang.Thread.run(Thread.java:745)
 Project loading failed: (r)etry, (q)uit, (l)ast, or (i)gnore? 
 ```
 
-Turns out the solution is not so bad - define `ANDROID_HOME` in bash and add `sbt-idea` plugin to `plugins.sbt` (found that hint [here][3]):
+So how to bootstrap a working scala with libgdx project?
+
+*1. Follow the snippet from above.*
+2. Define `ANDROID_HOME` in `idea.sh` and `.bashrc`
+3. Add `sbt-idea` plugin to `plugins.sbt` (found that hint [here][3]):
 
 ```scala
 addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.5.1") 
 ```
 
 **Note: there needs to be an empty line before `sbt-idea` plugin definition.**
-
-... and then ...
-
-`sbt update`
-
-which will download all necessary deps. Now the project will nicely import to IntelliJ.
-
 **Update:** alternatively just use my own version of template:
 
 ```
 g8 pkoperek/libgdx-sbt-project
 ```
 
-Ok - opening works - but what about running in emulator?
+4. Open the project in IntelliJ (not import - this doesn't work - **open**)
+5. After opening in IDEA - open `android` module settings. 
+5.1. Goto `Project Setting -> Modules -> android` and add Android facet. 
+5.2. Verify that paths in `Structure` and `Generated Source` are correct (point to `android` directory and not `.idea_modules`). 
+5.3. Remember on setting the language level to `6.0`!
+5.4. Set Android SDK in `Project Settings -> Modules -> android -> Dependencies` settings.
+6. In each module go to Scala facet configuration and change language level to version picked when generating project from `g8` template.
+
 
 [1]: http://raintomorrow.cc/post/70000607238/develop-games-in-scala-with-libgdx-getting-started
 [2]: http://libgdx.badlogicgames.com 
