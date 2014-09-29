@@ -49,8 +49,10 @@ g8 pkoperek/libgdx-sbt-project
 
 4. Run `sbt "project core" gen-idea`
 5. Open the project in IntelliJ (not import - this doesn't work - **open**)
-5. After opening in IDEA - open `android` module settings. 
-6. Set the language level to `6.0`.
+5. After opening in IDEA:
+5.1. In `android` module settings set the language level to `6.0`.
+5.2. In `desktop` module settings remove `null` from source roots list.
+5.3. Unmark `gen/com` as source root.
 
 Fork of template contains following improvements:
 1. Fixes project layout (`src/main/scala` instead of `src`)
