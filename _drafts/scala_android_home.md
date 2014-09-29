@@ -39,18 +39,9 @@ Project loading failed: (r)etry, (q)uit, (l)ast, or (i)gnore?
 
 So how to bootstrap a working scala with libgdx project?
 
-*1. Follow the snippet from above.*
+*1. Install conscript and g8 (first two lines of snippet above).*
 2. Define `ANDROID_HOME` in `idea.sh` and `.bashrc`
-3. Add `sbt-idea` plugin to `plugins.sbt` (found that hint [here][3]):
-
-```scala
-resolvers += "Sonatype snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
-
-addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.7.0-SNAPSHOT")
-```
-
-**Note: there needs to be an empty line before `sbt-idea` plugin definition.**
-**Update:** alternatively just use my own version of template:
+3. Use my fork of [libgdx template][3]:
 
 ```
 g8 pkoperek/libgdx-sbt-project
@@ -59,13 +50,19 @@ g8 pkoperek/libgdx-sbt-project
 4. Run `sbt "project core" gen-idea`
 5. Open the project in IntelliJ (not import - this doesn't work - **open**)
 5. After opening in IDEA - open `android` module settings. 
-5.1. Set the language level to `6.0`.
-5.2. Mark `src/main/scala` as `Source Root` and `src/test/scala` as `Test Source Root`
+6. Set the language level to `6.0`.
+
+Fork of template contains following improvements:
+1. Fixes project layout (`src/main/scala` instead of `src`)
+2. Removes test code from APKs (you can add test dependencies to `test` scope instead of compile + removing by proguard)
+3. Updated plugins and libgdx versions
+4. Added scalatest
+5. Adds `sbt-idea` plugin in latest version
 
 Workflow:
 * After adding a new dep remember about `sbt update` and `sbt "project core" gen-idea`
 * To run app in emulator, start one with AVD and run `sbt android/android:run`
-
+* To generate a package hit `sbt android/android:package`
 
 [1]: http://raintomorrow.cc/post/70000607238/develop-games-in-scala-with-libgdx-getting-started
 [2]: http://libgdx.badlogicgames.com 
