@@ -37,34 +37,31 @@ at java.lang.Thread.run(Thread.java:745)
 Project loading failed: (r)etry, (q)uit, (l)ast, or (i)gnore? 
 ```
 
-So how to bootstrap a working scala with libgdx project?
+So how to bootstrap a working libgdx@scala project?
 
-*1. Install conscript and g8 (first two lines of snippet above).*
-2. Define `ANDROID_HOME` in `idea.sh` and `.bashrc`
-3. Use my fork of [libgdx template][3]:
-
-```
-g8 pkoperek/libgdx-sbt-project
-```
-
-4. Run `sbt "project core" gen-idea`
-5. Open the project in IntelliJ (not import - this doesn't work - **open**)
-5. After opening in IDEA:
-5.1. In `android` module settings set the language level to `6.0`.
-5.2. In `desktop` module settings remove `null` from source roots list.
-5.3. Unmark `gen/com` as source root.
+1.  *Install conscript and g8 (first two lines of snippet above).*
+2.  Define `ANDROID_HOME` in `idea.sh` and `.bashrc`
+3.  Use my fork of [libgdx template][3]: `g8 pkoperek/libgdx-sbt-project`
+4.  Run `sbt "project core" gen-idea`
+5.  Open the project in IntelliJ (not import - this doesn't work - **open**)
+6.  After opening in IDEA:
+ 1.  In `android` module settings set the language level to `6.0`.
+ 2.  In `desktop` module settings remove `null` from source roots list.
+ 3.  Unmark `gen/com` as source root.
 
 Fork of template contains following improvements:
-1. Fixes project layout (`src/main/scala` instead of `src`)
-2. Removes test code from APKs (you can add test dependencies to `test` scope instead of compile + removing by proguard)
-3. Updated plugins and libgdx versions
-4. Added scalatest
-5. Adds `sbt-idea` plugin in latest version
+
+1.  Fixes project layout (`src/main/scala` instead of `src`)
+2.  Removes test code from APKs (you can add test dependencies to `test` scope instead of compile + removing by proguard)
+3.  Updated plugins and libgdx versions
+4.  Adds `scalatest`
+5.  Adds `sbt-idea` plugin in latest version
 
 Workflow:
-* After adding a new dep remember about `sbt update` and `sbt "project core" gen-idea`
-* To run app in emulator, start one with AVD and run `sbt android/android:run`
-* To generate a package hit `sbt android/android:package`
+
+*  After adding a new dependency remember about `sbt update` and `sbt "project core" gen-idea`
+*  To run app in emulator, start one with AVD and run `sbt android/android:run`
+*  To generate a package hit `sbt android/android:package`
 
 [1]: http://raintomorrow.cc/post/70000607238/develop-games-in-scala-with-libgdx-getting-started
 [2]: http://libgdx.badlogicgames.com 
