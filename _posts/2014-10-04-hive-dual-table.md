@@ -18,6 +18,6 @@ LIMIT 1;
 ```
 
 Hacky... But on the other hand pretty simple.
-The other way to do it is ... custom UDTF. Check how it can be done with this project: https://github.com/pkoperek/hive-single-row-udtf 
+The other way to do it is ... write a custom UDTF. Check how it can be done with this project: [github](https://github.com/pkoperek/hive-single-row-udtf)
 
-Oracle docs on `DUAL`: http://docs.oracle.com/cd/B19306_01/server.102/b14200/queries009.htm
+Oracle docs on `DUAL`: [Oracle docs](http://docs.oracle.com/cd/B19306_01/server.102/b14200/queries009.htm)
