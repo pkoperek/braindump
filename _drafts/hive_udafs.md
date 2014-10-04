@@ -4,7 +4,7 @@ title: draft
 ---
 
 Hive 0.10:
-Shitty exception not saying what is going on:
+Another exception not saying what is going on:
 
 ```
 FAILED: SemanticException [Error 10025]: Line 3:0 Expression not in GROUP BY key 'XXXXXX'
