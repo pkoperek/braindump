@@ -8,11 +8,10 @@ title: notes on Clean Code - Formatting chapter
     * Name should be simple and explanatory.
     * Top parts of the file should provide high-level concepts.
     * The lower == the more detailed information.
-  * Blank lines can identify separate concepts.
+  * Blank lines help in identification of separate concepts.
   * **Pieces of code which are related should be kept close in source code.**
   * Instance variables should live at the top of the class file.
-  * Local variable should be declared as close to the place of usage as possible.
-  * This which are conceptually similar should be close to each other. 
+  * Local variables should be declared as close as possible to the place of usage.
   * Code which is executed from a function, should be below that function.
   * Lines should be at most 120 columns wide. (*Uncle's Bob personal preference*)
   * Preserve indentation of blocks.
