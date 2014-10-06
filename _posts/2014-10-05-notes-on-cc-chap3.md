@@ -1,6 +1,6 @@
 ---
 layout: post
-title: notes from "Clean Code - Functions" chapter
+title: notes on "Clean Code - Functions" chapter
 ---
 
 Main thoughts I want to remember from that chapter:
