@@ -1,6 +1,6 @@
 ---
 layout: post
-title: notes on Clean Code - Comments chapter
+title: notes on "Clean Code - Comments" chapter
 ---
 
   * Better refactor code than comment it.
