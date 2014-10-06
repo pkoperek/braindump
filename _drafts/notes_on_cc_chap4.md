@@ -10,10 +10,12 @@ title: notes on Clean Code - Comments chapter
   * "HTML in source code comments is an abomination".
   * Most comments are useless (too far from code, too obvious, just mumbling, not accurate enough).
 
-  When comments may be good:
+When comments might be a good idea:
+
   * Legal obligation to write specific comments (copyrights).
-  * Clarification of code which just can't be written in more expressive way.
+  * Clarification of code which just can't be written in more expressive way (quite rare).
   * Docs on public API.
 
-  What I disagree with:
+What I disagree with:
+
   * TODO comments are bad - not good. Instead of TODO comment there should be a task in backlog, explaining what should be corrected.
