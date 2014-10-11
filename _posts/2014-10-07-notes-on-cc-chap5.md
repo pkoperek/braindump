@@ -1,6 +1,6 @@
 ---
 layout: post
-title: notes on Clean Code - Formatting chapter
+title: notes on "Clean Code - Formatting" chapter
 ---
 
   * **Formatting is important**
