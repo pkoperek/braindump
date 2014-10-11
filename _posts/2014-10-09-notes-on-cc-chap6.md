@@ -1,6 +1,6 @@
 ---
 layout: post
-title: notes on Clean Code - Objects and Data structures chapter
+title: notes on "Clean Code - Objects and Data structures" chapter
 ---
 
   * Hiding implementation is about **making abstractions** and not putting layers of functions (like numerous getters and setters).
