@@ -28,3 +28,4 @@ SELECT * FROM test_avro;
 
 [1]: http://avro.apache.org/docs/1.7.7/gettingstartedjava.html
 [2]: http://github.com/commercehub-oss/gradle-avro-plugin 
+[3]: https://github.com/FasterXML/jackson-dataformat-avro
