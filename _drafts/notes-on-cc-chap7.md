@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Notes on "Clean Code - Error Handling"
+title: Notes on "Clean Code - Error Handling" chapter
 ---
 
   * _"Error handling is important, but if it obscures logic, it's wrong"_
