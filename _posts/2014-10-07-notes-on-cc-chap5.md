@@ -1,6 +1,7 @@
 ---
 layout: post
 title: notes on "Clean Code - Formatting" chapter
+comments: true
 ---
 
   * **Formatting is important**

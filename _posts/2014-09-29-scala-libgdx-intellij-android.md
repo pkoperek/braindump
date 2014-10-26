@@ -1,6 +1,7 @@
 ---
 layout: post
 title: libgdx && android && scala && idea
+comments: true
 ---
 
 I would like to seriously start learning Scala... So why not try it out to do some Android development? To make it even more funny (... or tragic) lets mix in the [libgdx][2] library. I installed Scala and SBT plugins for IntelliJ and started with [this][1] description for project setup. Everything works perfectly fine when running:
