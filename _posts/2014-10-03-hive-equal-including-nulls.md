@@ -1,6 +1,7 @@
 ---
 layout: post
 title: hive <=> operator 
+comments: true
 ---
 
 Human being learns all the time ... I've just found out that there is a wonderfully simple way of writing equal conditions including NULL values in Hive: [the <=> operator](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF). 

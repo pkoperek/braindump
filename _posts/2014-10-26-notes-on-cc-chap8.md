@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Notes on "Clean Code - Boundaries" chapter
+comments: true
 ---
 
   * Encapsulate foreign/alien APIs (create own interfaces and adapters using the foreign API).

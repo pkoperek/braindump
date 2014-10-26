@@ -1,6 +1,7 @@
 ---
 layout: post
 title: jUnit creates new instance of test class for each test method
+comments: true
 ---
 
 This seems to be a bit counter-intuitive. You can use `setUp()` and `tearDown()` methods to setup the test environment. On the other hand - the code can be a bit shorter and more concise. Consider those two fragments:
