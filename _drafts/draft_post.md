@@ -1,6 +1,7 @@
 ---
 layout: post
 title: draft
+comments: true
 ---
 
 Spell checking in Vim:
