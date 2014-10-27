@@ -1,6 +1,7 @@
 ---
 layout: post
 title: faking DUAL table in hive
+comments: true
 ---
 
 It is sometimes beneficial to have something constant in database. RDBMs engines like Oracle or DB2 have tables like DUAL or SYSIBM.SYSDUMMY1. In hive there is no such thing by default ... But why not create a custom one? The easiest way (which I think works on all (???) Linux boxes) is to create one based on `/etc/hostname`. 
