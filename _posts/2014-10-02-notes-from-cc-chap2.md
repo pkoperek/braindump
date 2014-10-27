@@ -1,6 +1,7 @@
 ---
 layout: post
 title: notes on Clean Code - Meaningful Names chapter
+comments: true
 ---
 
 Names are the essence of source code - hence need to choose them with great care.
