@@ -94,6 +94,17 @@ Execution plan after:
 >          File Output Operator
 >          ... (output to file)
 
+Dessert: Hortonworks suggests turning off memory limits when you hit this problem :)
+
+http://docs.hortonworks.com/HDPDocuments/HDP1/HDP-1.3.0/bk_releasenotes_hdp_1.x/content/ch_relnotes-hdp1.3.0_5_hive.html
+
+> Problem: When using the Hive script to create and populate the partitioned table dynamically, the following error is reported in the TaskTracker log file:
+> TaskTree [pid=30275,tipID=attempt_201305041854_0350_m_000000_0] is running beyond memory-limits. Current usage : 1619562496bytes. Limit : 1610612736bytes. Killing task. TaskTree [pid=30275,tipID=attempt_201305041854_0350_m_000000_0] is running beyond memory-limits. Current usage : 1619562496bytes. Limit : 1610612736bytes. Killing task. Dump of the process-tree for attempt_201305041854_0350_m_000000_0 : |- PID PPID PGRPID SESSID CMD_NAME USER_MODE_TIME(MILLIS) SYSTEM_TIME(MILLIS) VMEM_USAGE(BYTES) RSSMEM_USAGE(PAGES) FULL_CMD_LINE |- 30275 20786 30275 30275 (java) 2179 476 1619562496 190241 /usr/jdk64/jdk1.6.0_31/jre/bin/java ...
+> Workaround: The workaround is disable all the memory settings (...)
+
+What DISTRIBUTE BY does?
+
+http://stackoverflow.com/questions/18951827/distributed-clause-in-hive
 
     [1]: http://www.slideshare.net/ye.mikez/hive-tuning
     [2]: https://issues.apache.org/jira/browse/HIVE-6455
