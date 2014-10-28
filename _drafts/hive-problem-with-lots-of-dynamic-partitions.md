@@ -94,6 +94,8 @@ Execution plan after:
 >          File Output Operator
 >          ... (output to file)
 
+To make it working You need to remember to set hive.exec.max.dynamic.partitions/.pernode in such a way that hive doesn't crap out with an error.
+
 Dessert: Hortonworks suggests turning off memory limits when you hit this problem :)
 
 http://docs.hortonworks.com/HDPDocuments/HDP1/HDP-1.3.0/bk_releasenotes_hdp_1.x/content/ch_relnotes-hdp1.3.0_5_hive.html
