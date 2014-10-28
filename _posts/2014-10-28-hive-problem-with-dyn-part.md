@@ -9,31 +9,34 @@ Today I spent some time investigating why one of our hive queries failed. Cause:
 
 Quick look on configuration which was used to configure dynamic partitioning:
 
->    <property>
->        <name>hive.exec.dynamic.partition.mode</name>
->        <value>nonstrict</value>
->    </property>
->    <property>
->        <name>hive.exec.dynamic.partition</name>
->        <value>true</value>
->    </property>
->    <property>
->        <name>hive.exec.max.dynamic.partitions</name>
->        <value>1000</value>
->    </property>
->    <property>
->        <name>hive.exec.max.dynamic.partitions.pernode</name>
->        <value>1000</value>
->    </property>
+```xml
+    <property>
+        <name>hive.exec.dynamic.partition.mode</name>
+        <value>nonstrict</value>
+    </property>
+    <property>
+        <name>hive.exec.dynamic.partition</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>hive.exec.max.dynamic.partitions</name>
+        <value>1000</value>
+    </property>
+    <property>
+        <name>hive.exec.max.dynamic.partitions.pernode</name>
+        <value>1000</value>
+    </property>
+```
 
-First idea: the number of partitions can be limited with a `WHERE` clause. The number of partitions dropped to ~400 - updated query worked fine. The solution no 1 is to split processing into multiple queries with separate data ranges. Uffff... Lets have another look. There wasn't that much data to insert (~600MB). Hive estimated that it needs only 2 mappers for processing... After some googling I found this [2]. The symptoms are the same - big number of partitions (in my case > 2,5k), container being killed because of high memory usage. I've also made couple interesting observations:
+First idea: the number of partitions can be limited with a `WHERE` clause. Lets try it out... The number of partitions dropped to ~400 - updated query worked fine. The solution no 1 is to split processing into multiple queries with separate data ranges. Uffff... Lets have another look. There wasn't that much data to insert (~600MB). Hive estimated that it needs only 2 mappers for processing... After some googling I found this [2]. The symptoms are the same - big number of partitions (in my case > 2,5k), container being killed because of high memory usage. I've also made couple interesting observations:
+
   * `-Xmx` of JVM is set to 1536M - which is way below the container limit (2GB). 
   * The stage which fails is a Map Reduce TableScan stage. And this stage uses only 2 mappers:
     > Hadoop job information for Stage-1: number of mappers: 2; number of reducers: 0
 
 This suggests that this might be a data distribution problem. There is a part of HiveQL which can influence how data distribution is done: `DISTRIBUTE BY` clause. What does it do? [This][3] seems to provide quite nice explanation. After adding `DISTRIBUTE BY` by the dynamic partition Hive stopped failing (hurray!). But what actually happened?
 
-> Hadoop job information for Stage-1: number of mappers: 2; number of reducers: 1
+`Hadoop job information for Stage-1: number of mappers: 2; number of reducers: 1`
 
 Turns out the query plan got slightly changed. Execution plan before:
 
