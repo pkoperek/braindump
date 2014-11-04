@@ -105,3 +105,4 @@ at org.apache.hadoop.mapreduce.Job.submit(Job.java:1283)
 
   * The solution is to extend the TextOutputFormat class as instructed on http://mail-archives.apache.org/mod_mbox/hadoop-mapreduce-user/201204.mbox/%3CCA0E4C80784FAE4398333564344FDB8F997E3BFBF6@EXCHANGE08.webde.local%3E
 
+  * Many useful clues: http://hbase.apache.org/book/mapreduce.example.html
