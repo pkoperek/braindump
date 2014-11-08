@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Writing MR job which reads (scans a table) from HBase
+title: Writing MR job which reads (scans) a table from HBase
 comments: true
 ---
 
