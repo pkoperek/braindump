@@ -1,11 +1,10 @@
 ---
 layout: post
-title: The Data Warehouse Toolkit - Chapter 2 - notes
+title: The Data Warehouse Toolkit - Chapter II - notes
 comments: true
 ---
 
-Techniques for dimensional modelling:
-* Fundamental concepts:
+* Fundamental concepts of dimensional modelling:
    1. Gather requirements and needs of the business.
    2. Before designing anything - talk with experts (_workshops_ - WAAT?).
    3. Design the dimensional model:
@@ -18,8 +17,8 @@ Techniques for dimensional modelling:
    6. Identify the context - which is enclosed in dimensions.
    7. Identify facts - which are almost always numeric and usually correspond some physical action.
 
-* Star schema = dimensional structure deployed in a RDBMS.
-* OLAP cube - dimensional structure implemented in a multidimensional database.
+* **Star schema = dimensional structure deployed in a RDBMS.**
+* **OLAP cube - dimensional structure implemented in a multidimensional database.**
 * Facts can be additive (can be summed across _all_ dimensions related to the table), semi-additive (can be summed across _some_ dimensions), non-additive.
 * Instead of putting `NULL` values into FKs in fact table - create **guard** rows in dimension tables.
 * Dimension table primary key can't be the operations system's natural key - it needs to be artificial, because there will be **multiple dimension rows** for that natural key (**dimension rows changes are tracked over time**).
@@ -27,7 +26,7 @@ Techniques for dimensional modelling:
 * Dimensions can be used multiple times in the same fact table row in different contexts. It is recommended to create views for dimension table to make the context explicit.
 * Merge low-cardinality flags/indicator dimensions into a single dimension table (less joins!). Don't create cross product of all combinations - create rows only for combinations which are actually used.
 * Avoid normalizing dimension tables (multilevel structure of _snowflake_) - it is difficult for business users to understand it.
-* Conformed Dimensions - dimensions which are used across different fact tables - can be used to join data from different business processes.
+* _Conformed Dimensions_ - dimensions which are used across different fact tables - can be used to join data from different business processes.
 * Changing dimension attributes:
   1. No need to change - attributes never change (!)
   2. Overwrite - old row gets overwritten with new value
