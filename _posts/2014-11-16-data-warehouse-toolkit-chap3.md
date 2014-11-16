@@ -4,10 +4,10 @@ title: The Data Warehouse Toolkit - Chapter III - notes
 comments: true
 ---
 
-Chapter is a use case of applying dimensional modelling to in a typical retail organization scenario.
+Chapter is a use case of applying dimensional modelling in a typical retail organization scenario.
 
 1. Select business process
-   * Making sales transactions at POS (_Point Of Sale_). 
+   * Sales transactions at POS (_Point Of Sale_). 
 2. Declare the grain
    * Grain level == single product on a POS transaction.
 3. Identifying dimensions:
@@ -26,10 +26,7 @@ Chapter is a use case of applying dimensional modelling to in a typical retail o
    * Extended dollar amount (if provided)
    * Extended cost amount (if provided)
    * Extended ...
-
-   Kimball suggests that derived data such as gross profit (diff between cost and sales price) should be computed at ETL stage and made available to users. Don't think it is a good idea - I would prefer the solution with view and dynamic computation of this kind of value. On the other hand depending on what is the actual data set size is it might be the only option. 
-
-   > Percentages and ratios, such as gross margin, are non-additive. 
+   * Quote: _"Percentages and ratios, such as gross margin, are non-additive."_
 
 5. Next estimate the size of data inflow (rows per day/week/month) to fact table.
 6. Define dimension table attributes 
@@ -39,8 +36,9 @@ Chapter is a use case of applying dimensional modelling to in a typical retail o
    * If product key contains embedded information - explode it to separate columns.
    * Rule of a thumb when in doubt what is fact or dimension attribute:
 
-   > Data elements that are used both for fact calculations and dimension constraining, grouping, and labeling should be stored in both location.
+   > Data elements that are used both for fact calculations and dimension constraining, grouping, and labeling should be stored in both locations.
 
+* Kimball suggests that derived data such as gross profit (diff between cost and sales price) should be computed at ETL stage and made available to users. Don't think it is a good idea - I would prefer the solution with view and dynamic computation of this kind of value. On the other hand depending on what is the actual data set size is it might be the only option. 
 * **Drill down** - just add a column to report, which slices already presented rows in more detailed categories.
 * **Degenerate dimension** - dimension without a table. Exists just as a column in fact table. Can be used for grouping facts or just as a back reference to operational system.
 * Adding new dimension: create a table, add a single row "Prior to introducing new dimension", add a new column to fact table, populate it with key to that "gravestone" row.
@@ -59,6 +57,7 @@ Chapter is a use case of applying dimensional modelling to in a typical retail o
     * **Replace updates with row insert/delete** - _now this is something useful for hive @ HDFS_
 
 Final thoughts:
+
   * don't do "snowflakes" in dimensions (don't normalize dimensions) - doesn't make much sense and can actually harm performance (joins!)
   * outriggers (referencing dimensions in dimensions) are permissible - but not advised
   * avoid using too many dimensions in a single fact table - 20/25 tops. If you have more - try to combine correlated dimensions into one.
