@@ -4,12 +4,6 @@ title: Oozie MR1 compatibility mode
 comments: true
 ---
 
-Spell checking in Vim:
-
-```
-:set spell spelllang=en_us
-```
-
 It took me some time to figure out what does that mean:
 
     > java.io.IOException: mapreduce.job.outputformat.class is incompatible with reduce compatability mode.
