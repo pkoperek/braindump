@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Data Warehouse Toolkit VII notes
+title: Data Warehouse Toolkit Chapter VII - notes
 comments: true
 ---
 
