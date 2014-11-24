@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The Data Warehouse Toolkit - Chapter II - notes
+title: The Data Warehouse Toolkit Chapter II - notes
 comments: true
 ---
 
