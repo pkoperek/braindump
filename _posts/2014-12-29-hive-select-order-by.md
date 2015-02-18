@@ -4,7 +4,7 @@ title: hive loves DISTINCT and ORDER BY
 comments: true
 ---
 
-Just came into an interesting bug: (HIVE-2954)[https://issues.apache.org/jira/browse/HIVE-2954] and (HIVE-4564)[https://issues.apache.org/jira/browse/HIVE-4564].
+Just came into an interesting bug: [HIVE-2954](https://issues.apache.org/jira/browse/HIVE-2954) and [HIVE-4564](https://issues.apache.org/jira/browse/HIVE-4564).
 The best part:
 
 ```
