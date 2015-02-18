@@ -16,4 +16,4 @@ Fix Version/s: 0.9.1
 Resolved or not resolved? :) 
 My version of hive (0.10) still has it - so probably everything later has it as well.
 
-(Oh well - yet another day in hive's world)[https://www.youtube.com/watch?v=Qt2mbGP6vFI]
+[Oh well - yet another day in hive's world](https://www.youtube.com/watch?v=Qt2mbGP6vFI)
