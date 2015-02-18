@@ -35,7 +35,7 @@ def enoughMemory(o: Offer) = {
 }
 ```
 
-which changes in 1.1.1 to:
+which changes in 1.1.1 [SPARK-3535](https://issues.apache.org/jira/browse/SPARK-3535) to:
 
 ```scala
 def sufficientOffer(o: Offer) = {
