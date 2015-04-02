@@ -7,6 +7,7 @@ comments: true
 * Data Warehouses are analytical tools - based on them business is going to make decisions.
 * It doesn't have any sense to create a warehouse if nobody wants to use it.
 * Warehouse needs to be:
+  * understandable by business people - using business vocabulary
   * **trustworthy**
   * consistent
   * easily accessible
@@ -14,7 +15,8 @@ comments: true
   * secure
   * fast enough 
 * **Star schema** - dimensional model implemented in RDBMS.
-* Fact table - a business measurement event. All measurement rows must be on the same grain (level of detail). **This is a bedrock principle for dimensional modeling.**
+* **Fact == bussiness measure**
+* Fact table - stores the performance measurements result from a business event. All measurement rows must be on the same grain (level of detail). **This is a bedrock principle for dimensional modeling.**
   * **The most useful facts are numeric and additive** - it is possible to carry out aggregations on them.
   * There are semi-additive facts (eg. account balance) - can be summed in general, but eg. not in time dimension.
   * _Facts are often described as continuously valued_ (dimensions can be discrete)
@@ -30,12 +32,12 @@ comments: true
   * Have a single **primary key**.
   * Are a primary source of query constraints, groupings, report labels.
   * Attributes should be described with actual human-understandable names 
-  * In many ways, the data warehouse is only as good as the dimension attributes_.
+  * _In many ways, the data warehouse is only as good as the dimension attributes_.
   * Rule of a thumb: 
     > Continuously valued numeric observations are almost always facts; discrete numeric observations drawn from a small list are almost always dimension attributes.
   * Almost always dimension table space should be traded off for simplicity and accessability.
 
-* Each business model should be modelled wit its own star schema model.
+* Each business model should be modelled with its own star schema model.
 * Kimball's DW/BI architecture
   * Comprises of four components:
     * Operational source systems - systems the data is copied from
