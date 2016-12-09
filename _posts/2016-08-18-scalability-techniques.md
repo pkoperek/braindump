@@ -4,7 +4,7 @@ title: Notes on scalability techniques
 comments: true
 ---
 
-Scalability is one probably one of the hardest challenges when you're building a distributed system. It also the _desired_ one: if you need to scale your app, it means you have many happy users! Recently I found a great resource which tries to answer the question of how to design a scalable system. Funny enough: it is a website which contains materials and tips preparing for software engineering interviews ([hired in tech](www.hiredintech.com)). Below are my notes from reading through those materials.
+Scalability is one probably one of the hardest challenges when you're building a distributed system. It also the _desired_ one: if you need to scale your app, it means you have many happy users! Recently I found a great resource which tries to answer the question of how to design a scalable system. Funny enough: it is a website which contains materials and tips preparing for software engineering interviews ([hired in tech](http://www.hiredintech.com)). Below are my notes from reading through those materials.
 
 The design process can be summarized as a list of steps one has to follow. It is also called as the _strategy for approaching system design questions at tech interviews_ :)
 
@@ -33,13 +33,15 @@ The design process can be summarized as a list of steps one has to follow. It is
 5. **Scaling.** Here we address the problems found in point 4. You should first try to use some well known techniques to avoid reinventing the wheel. List of techniques + their trade-offs is below.
 
 The important side notes are: 
+
 * The scope is really important. It is necessary to understand the priorities to make good trade-offs.
 * The _abstract design_ is not finite - you can tweak it :)
 * **ALL** estimations on this level are just ballpark figures: we want to know whether the system requires 1000s of servers or just several to handle the projected load. To know better: just get the current numbers and run them against your projections. Based on experience: this will feel good/bad. At the end you can always just experiment with letting only a small percentage of users in and checking if the projections still hold. If not - get back to design because you just identified new bottlenecks.
 
 After writing this down I realized that this look like a check-list for any new system design process :) So, here goes the list of techniques which can be used to solve scalability/availability problems:
 
-1. **Load-balancing.** This can be done on different levels (e.g. DNS round-robin over a pool of IPs, dedicated entry point to the stack - the load-balancer). The trade-off to make is introducing a single point of failure (the load balancer itself). To solve this: buy another load-balancer and set it to replicate the first one's work in active-active model (each of them handles a portion of traffic; if one goes down the other one takes all the load). There is also a problem with session data: user can potentially hit a different server each time. This can be solved by delegating storage to a centralized _external_ data store available to all servers (RDBMS, external persistent cache - e.g. Redis). The application code should be therefore _stateless_ what means it doesn't store any extra data on side (just contains business logic). This way it is very easy to scale the pool of application servers by simply adding more units. _External_ means that the db doesn't reside on the same machines as application code (if app server crashes - db is left intact).
+1. **Load-balancing.** 
+This can be done on different levels (e.g. DNS round-robin over a pool of IPs, dedicated entry point to the stack - the load-balancer). The trade-off to make is introducing a single point of failure (the load balancer itself). To solve this: buy another load-balancer and set it to replicate the first one's work in active-active model (each of them handles a portion of traffic; if one goes down the other one takes all the load). There is also a problem with session data: user can potentially hit a different server each time. This can be solved by delegating storage to a centralized _external_ data store available to all servers (RDBMS, external persistent cache - e.g. Redis). The application code should be therefore _stateless_ what means it doesn't store any extra data on side (just contains business logic). This way it is very easy to scale the pool of application servers by simply adding more units. _External_ means that the db doesn't reside on the same machines as application code (if app server crashes - db is left intact).
 2. **Caching.** Replace costly queries (typically db queries) by storing the result of query in memory. The next time a service tries to run the same query, result is almost instantaneous. The caveats are: 1) size of cache is limited to e.g. size of RAM, 2) when data in db is updated you need to update the cached value (and possibly evict all results of queries which depend on that value), 3) cached queries have to be frequent enough to see a boost (if you issue the query only once in a while, the cached result might be evicted before the query hits again). Examples of in-memory caches (other types are usually not performant enough): [memcached](https://memcached.org/) and [redis](http://redis.io/). [Le Cloud blog](http://www.lecloud.net/post/9246290032/scalability-for-dummies-part-3-cache) suggests that to avoid some of the problems (e.g. no 2 from presented list) it is better to cache _objects_ as in understanding of your programming language. The pattern is as follows: when the first request comes, the code 'assembles' the object, what may include multiple db queries. Next you serialize the object and send it to cache. When the next request come in you can just deserialize the necessary objects from cache. The other upside is that it is possible to apply the idea of _asynchronous_ processing (instead of filling the cache with the objects which are required by the current request, you can fill the cache with pre-made objects).
 3. **DB optimization** . Basically the more queries you throw at the RDBMS the slower it gets (well after reaching a specific threshold set up by the machine capabilities and how well is the db tuned). There are many things actually which you can do: 
     1) _replicate the db_ in a master-slave scheme (master handles writes, slaves handle reads), 
@@ -53,11 +55,13 @@ It is very important to understand the difference between _horizontal_ and _vert
 In each of the sentences from the previous paragraph you can replace the _hardware_ with _virtual machines_ coming from cloud providers.
 
 Things to consider when thinking about scalability:
+
 * **failures** - each part of the system may fail and you have to remember to think about those scenarios
 * **read-heavy or write-heavy** - depending on to which category the system falls into, the design will be completely different (there are also some templates how to deal with specific problems in each case)
 * **security** - how the system design affects the security, where is the weakest link of the whole chain
 
 Sources of information:
+
 * [Le Cloud scalability series](http://www.lecloud.net/tagged/scalability)
 * [CS75 - Scalability](https://youtu.be/-W9F__D3oY4)
 * [MySQL sharding](http://highscalability.com/blog/2009/8/6/an-unorthodox-approach-to-database-design-the-coming-of-the.html)
