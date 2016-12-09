@@ -6,7 +6,6 @@ highlighter:         pygments
 #
 # Use of `relative_permalinks` ensures post links from the index work properly.
 permalink:           pretty
-relative_permalinks: true
 
 # Setup
 title:               'braindump'
@@ -25,4 +24,4 @@ author:
 # Custom vars
 version:             1.0.0
 
-gems:	[jekyll-sitemap]
+gems:	[jekyll-sitemap, jekyll-paginate]
