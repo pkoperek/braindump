@@ -14,7 +14,7 @@ Notes and observations from watching a lecture by Tyler Bosmeny - Clever CEO.
   * Prospecting - finding who might be interested in the product
   * Conversations - you reach to people and check whether they are actually
     interested, if the product is a good match
-  * Closing - get the committment 
+  * Closing - get the committment
   * Revenue :)
 
 ## Prospecting
@@ -24,10 +24,10 @@ Notes and observations from watching a lecture by Tyler Bosmeny - Clever CEO.
 * innovators (people who might be willing to pay for your service) are just
   2,5% of the population
 * you need to talk to _a lot_ of people
-* best methods 
+* best methods
   * reach out to your network
   * conferences
-    * small gatherings of people who are potential users 
+    * small gatherings of people who are potential users
     * figure out top conferences for your field
     * ask organizers for a list of people who are attending (_GDPR????_)
     * email them and explain what are you working on and that you would like to
@@ -43,7 +43,7 @@ Notes and observations from watching a lecture by Tyler Bosmeny - Clever CEO.
 
 ## Conversations
 
->> Sales is about listening.
+> Sales is about listening.
 
 * Shut up and listen.
 * Best sales people in the world listen a lot and ask questions

@@ -1,6 +1,9 @@
 # Dependencies
 markdown:            kramdown
 highlighter:         rouge
+plugins:
+  - jekyll-sitemap
+  - jekyll-paginate
 
 # Permalinks
 #
@@ -23,5 +26,3 @@ author:
 
 # Custom vars
 version:             1.0.0
-
-gems:	[jekyll-sitemap, jekyll-paginate]
