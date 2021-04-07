@@ -1,0 +1,69 @@
+My notes from working with Google Composer.
+
+
+ ## Google Composer
+
+### What is Google Composer?
+
+Google Composer is a tool available within the Google Cloud Platform. It is basically a managed version of [Apache Airflow](https://airflow.apache.org/). From functional perspective it should be basically the same as open source. The main difference is in ease of use and maintenance. You are basically able to do couple clicks and choose a few options in a wizard and boom - you have a running Airflow instance.
+
+### Architecture
+
+* Under the hood google creates a 3 node (by default) Kubernetes cluster
+  * The machine specs can be chosen
+* There are different versions depending on the network setup
+  * I find the Private IP one the most compelling as it gives a lot of control over how Airflow can be accessed from outside, but might be a bit more costly (you need to configure a private VPC and Cloud NAT)
+
+### Working with composer in practice
+
+When you work with Google Composer you probably want to automate couple of things. Namely:
+* synchronizing the DAGs with your SCM system
+* managing connections
+* managing DAG dependencies
+* [remember about keeping the "airflow_monitoring" DAG alive](https://stackoverflow.com/questions/56496779/why-is-there-a-dag-named-airflow-monitoring-automatically-generated-in-cloud-c)
+  * I switched it off and then debugged why the environment health went down
+
+### Pros
+
+* Using your Google Account to login/control the Airflow out-of-the-box
+* Tight control of communication (and this probably results in higher security) in the Private IP setup
+* Docker image management (although this seems a smallish issue as there are many good quality images out there, e.g. puckel's)
+* Monitoring built-in
+* A very nice feature which quite surprised me was the integration with Identity-Aware-Proxy what means that you can simply log-in with your Google account.
+
+### Cons
+
+* Dependency management might be quite a big issue:
+  * you can only use dependencies from PyPI and they need to play nice together with the dependecies used by Airflow
+  * this means that installing e.g. a custom package from git source is not really an option
+  * a workaround is to use PythonVirtualenvOperator, but it has similar limitations (you need to use PyPI but don't have to be compatible with Airflow)
+    * the caveat is how that works in practice: the operator literally takes the source code of the method you provide, puts it into a file and then executes that file in the new virtual env; this means there is no code sharing, even with other functions/variables from the same DAG!
+    * you can also use the KubernetesOperator, but this requires creating and hosting your own docker image, which sounds quite complicated given the operation you want to execute
+  * If you would like to e.g. install something directly from git or an url, it is not really possible.
+  * You can work-around this by using:
+    * Plugins feature
+    * Copying the dependency into DAGs folder (`Local Python library`)
+    * Using a `PythonVirtualEnvOperator` (but again this is limited to Python Package Index)
+    * Using a `KubernetesPodOperator`
+    * [Source](https://cloud.google.com/composer/docs/how-to/using/installing-python-dependencies)
+* Scheduler seemed to be a bit slow... not sure why
+* It is not entirely clear to me what are the modifications Google did
+* It seemed like the DAGs execute a bit slower (but maybe the reason was that worker machines should be higher end? I used the same config which worked really nice with a custom Airflow deployment in Azure)
+* I would expect a bit more to be managed:
+  * Right now you are expected to cover also low level details (e.g. configure
+    network if you e.g. want to have a single egress IP).
+  * You are effectively billed for the resources which are used by the cluster
+  * I would expect that the task scheduling and execution would get completely
+    managed by Google (e.g. I do not need to worry how many worker machines
+    to deploy - there would be some nice autoscaling).
+  * The console interface is a bit crude. I would expect Airflow UI to be embedded
+    in the console so I don't have to create another URI to expose the app
+* I actually expected more aspects of Composer to be managed
+  * Composer is basically an Airflow installation on a dedicated k8s cluster
+  * ... with Identity-Aware Proxy
+  * ... with automated image rebuild and deployment
+
+In general, Composer can get you started quite quickly up to speed with Airflow, which is good.
+However, there are some strings attached, which over time can become more and more painful to deal
+with. This ultimately depends on your setup though.
+
